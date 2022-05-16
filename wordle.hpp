@@ -14,6 +14,7 @@
 #define CYELLOW(x)	YELLOW x RESET
 #define CWHITE(x)	WHITE x RESET
 #define CGREEN(x)	GREEN x RESET
+#define CMAGENTA(x) MAGENTA x RESET
 
 class Wordle
 {

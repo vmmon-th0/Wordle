@@ -46,13 +46,14 @@ void Wordle::display_board()
 
 void Wordle::presentation() const
 {
+	std::cout << MAGENTA;
 	std::cout <<	 "__          ______  _____  _____  _      ______" 			<< std::endl;
 	std::cout << 	 "\\ \\        / / __ \\|  __ \\|  __ \\| |    |  ____|" 	<< std::endl;
 	std::cout <<  	 " \\ \\  /\\  / / |  | | |__) | |  | | |    | |__   "		<< std::endl;
 	std::cout << 	 "  \\ \\/  \\/ /| |  | |  _  /| |  | | |    |  __|  "		<< std::endl;
 	std::cout <<     "   \\  /\\  / | |__| | | \\ \\| |__| | |____| |____ "		<< std::endl;
 	std::cout <<     "    \\/  \\/   \\____/|_|  \\_\\_____/|______|______|"	<< std::endl;
-	std::cout << std::endl << std::endl;
+	std::cout << RESET << std::endl << std::endl;
 	std::cout << "Total words available : " << dict.size() << std::endl;
 }
 
@@ -91,12 +92,14 @@ void Wordle::gameHandler()
 	std::string buff_line;
 
 	initGame();
-	std::cout << secret_word << std::endl;
 	for (int i = 0; i < 6 && !std::cin.eof(); i++)
 	{
 		display_board();
 		std::cout << "Input : " << std::endl;
-		std::getline(std::cin, buff_line);
+		while (buff_line.size() != 5)
+		{
+			std::getline(std::cin, buff_line);
+		}
 		board[i] = designRow(buff_line.begin(), secret_word.begin(), buff_line); 
 		if (!secret_word.compare(buff_line))
 		{
@@ -104,6 +107,7 @@ void Wordle::gameHandler()
 			std::cout << CGREEN("Congratulations !") << std::endl;
 			return ;
 		}
+		buff_line.clear();
 	}
 	std::cout << CRED("Game over") << std::endl;
 }
