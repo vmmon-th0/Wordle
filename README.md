@@ -1,2 +1,2 @@
 ## Wordle
-![](wordle_img.png)
+![alt text](wordle_img.png)
